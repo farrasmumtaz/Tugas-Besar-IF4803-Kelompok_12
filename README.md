@@ -1,2 +1,2 @@
 # Tugas-Besar-IF4803-Kelompok_12
-Rancanglah multi-linked list yang memodelkan poli klinik, pasien, dan hubungan di antara mereka. Satu poli dapar diisi oleh banyak dokter serta satu dokter dapat menangani banyak pasien. Pasien dapat mengunjungi setiap poli sesuai jadwalnya. Program ini ditujukan untuk mencatatan setiap kunjungan yang ada di poli tersebut.
+Rancanglah multi-linked list yang memodelkan mahasiswa, UKM, dan hubungan di antara mereka. Seorang mahasiswa dapat bergabung ke banyak UKM, dan satu UKM dapat terdiri dari banyak mahasiswa.
