@@ -1,3 +1,6 @@
+#include <iostream>
+#include <string>
+using namespace std;
 typedef string InfotypeUKM;
 typedef elmenUKM AddressUKM;
 struct elmenUKM {
