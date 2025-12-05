@@ -1,34 +1,39 @@
-void createListUKM_c103012400197(ListUKM_103012400197 &L) {
-    firstUKM_103012400197(L) = NULL;
+#include "UKM.h"
+#include <iostream>
+using namespace std;
+
+void createListUKM_c103012400197(ListUKM &L) {
+    L.first = nullptr;
 }
 
-addressUKM_103012400197 isEmptyUKM_103012400197(ListUKM_103012400197 L) {
-    return firstUKM_103012400197(L) == NULL;
+AddressUKM isEmptyUKM_103012400197(ListUKM L) {
+    return L.first = nullptr;
 }
 
-AddressUKM_103012400197 createListUKM_103012400197(InfotypeUKM_103012400197 x) {
-    AddressUKM_103012400197 P = new elmenUKM_103012400197;
-    infoUKM_103012400197(P) = x;
-    nextUKM_103012400197(P) = NULL;
-    return P;
+AddressUKM createListUKM_103012400197(InfotypeUKM x) {
+    AddressUKM p;
+    p = new elmenUKM;
+    p -> info = x;
+    p -> next = nullptr;
+    return p;
 }
 
-void insertLastUKM_103012400197(ListUKM_103012400197 &L, AddressUKM_103012400197 P) {
+void insertLastUKM_103012400197(ListUKM &L, AddressUKM p) {
     if (isEmptyUKM_103012400197(L)) {
-        firstUKM_103012400197(L) = P;
+        L.first = p;
     } else {
-        AddressUKM_103012400197 Q = firstUKM_103012400197(L);
-        while (nextUKM_103012400197(Q) != NULL) {
-            Q = nextUKM_103012400197(Q);
+        AddressUKM q = L.first;
+        while (q -> next != nullptr) {
+            q = q -> next;
         }
-        nextUKM_103012400197(Q) = P;
+        q -> next = p;
     }
 }
 
-void printInfoUKM_103012400197(ListUKM_103012400197 L) {
-    AddressUKM_103012400197 P = firstUKM_103012400197(L);
-    while (P != NULL) {
-        cout << "- " << infoUKM_103012400197(P) << endl;
-        P = nextUKM_103012400197(P);
+void printInfoUKM_103012400197(ListUKM L) {
+    AddressUKM p = L.first;
+    while (p != nullptr) {
+        cout << "- " << p -> info << endl;
+        p = p -> next;
     }
 }
