@@ -2,15 +2,15 @@
 #include <iostream>
 using namespace std;
 
-void createListUKM_c103012400197(ListUKM &L) {
+void createListUKM(ListUKM &L) {
     L.first = nullptr;
 }
 
-AddressUKM isEmptyUKM_103012400197(ListUKM L) {
+AddressUKM isEmptyUKM(ListUKM L) {
     return L.first = nullptr;
 }
 
-AddressUKM createListUKM_103012400197(InfotypeUKM x) {
+AddressUKM createListUKM(InfotypeUKM x) {
     AddressUKM p;
     p = new elmenUKM;
     p -> info = x;
@@ -18,8 +18,8 @@ AddressUKM createListUKM_103012400197(InfotypeUKM x) {
     return p;
 }
 
-void insertLastUKM_103012400197(ListUKM &L, AddressUKM p) {
-    if (isEmptyUKM_103012400197(L)) {
+void insertLastUKM(ListUKM &L, AddressUKM p) {
+    if (isEmptyUKM(L)) {
         L.first = p;
     } else {
         AddressUKM q = L.first;
@@ -30,7 +30,7 @@ void insertLastUKM_103012400197(ListUKM &L, AddressUKM p) {
     }
 }
 
-void printInfoUKM_103012400197(ListUKM L) {
+void printInfoUKM(ListUKM L) {
     AddressUKM p = L.first;
     while (p != nullptr) {
         cout << "- " << p -> info << endl;
