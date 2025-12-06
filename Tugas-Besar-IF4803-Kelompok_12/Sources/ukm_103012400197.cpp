@@ -1,20 +1,25 @@
-void createListUKM_c103012400197(ListUKM_103012400197 &L) {
-    firstUKM_103012400197(L) = NULL;
+#include "UKM.h"
+#include <iostream>
+using namespace std;
+
+void createListUKM(ListUKM &L) {
+    L.first = nullptr;
 }
 
-AddressUKM isEmptyUKM_103012400197(ListUKM L) {
+AddressUKM isEmptyUKM(ListUKM L) {
     return L.first = nullptr;
 }
 
-AddressUKM_103012400197 createListUKM_103012400197(InfotypeUKM_103012400197 x) {
-    AddressUKM_103012400197 P = new elmenUKM_103012400197;
-    infoUKM_103012400197(P) = x;
-    nextUKM_103012400197(P) = NULL;
-    return P;
+AddressUKM createListUKM(InfotypeUKM x) {
+    AddressUKM p;
+    p = new elmenUKM;
+    p -> info = x;
+    p -> next = nullptr;
+    return p;
 }
 
-void insertLastUKM_103012400197(ListUKM &L, AddressUKM p) {
-    if (isEmptyUKM_103012400197(L)) {
+void insertLastUKM(ListUKM &L, AddressUKM p) {
+    if (isEmptyUKM(L)) {
         L.first = p;
     } else {
         AddressUKM q = L.first;
@@ -25,7 +30,7 @@ void insertLastUKM_103012400197(ListUKM &L, AddressUKM p) {
     }
 }
 
-void printInfoUKM_103012400197(ListUKM L) {
+void printInfoUKM(ListUKM L) {
     AddressUKM p = L.first;
     while (p != nullptr) {
         cout << "- " << p -> info << endl;
