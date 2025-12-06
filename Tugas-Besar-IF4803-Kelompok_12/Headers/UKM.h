@@ -1,7 +1,9 @@
+#ifndef UKM_H
+#define UKM_H
 #include <iostream>
 using namespace std;
 typedef string   InfotypeUKM;
-typedef elmenUKM AddressUKM;
+typedef struct elmenUKM *AddressUKM;
 struct elmenUKM {
     InfotypeUKM info;
     AddressUKM next;
