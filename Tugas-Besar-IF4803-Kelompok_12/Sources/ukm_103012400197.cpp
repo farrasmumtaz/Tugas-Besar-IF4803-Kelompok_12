@@ -2,7 +2,7 @@
 #include <iostream>
 using namespace std;
 
-void createListUKM_c103012400197(ListUKM &L) {
+void createListUKM_103012400197(ListUKM &L) {
     L.first = nullptr;
 }
 
@@ -10,7 +10,7 @@ AddressUKM isEmptyUKM_103012400197(ListUKM L) {
     return L.first = nullptr;
 }
 
-AddressUKM createListUKM_103012400197(InfotypeUKM x) {
+AddressUKM createElementUKM_103012400197(InfotypeUKM x) {
     AddressUKM p;
     p = new elmenUKM;
     p -> info = x;

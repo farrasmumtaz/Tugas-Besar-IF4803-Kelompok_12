@@ -1,7 +1,9 @@
+#ifndef UKM_H
+#define UKM_H
 #include <iostream>
 using namespace std;
 typedef string   InfotypeUKM;
-typedef elmenUKM AddressUKM;
+typedef struct elmenUKM *AddressUKM;
 struct elmenUKM {
     InfotypeUKM info;
     AddressUKM next;
@@ -13,6 +15,7 @@ struct ListUKM {
 
 void createListUKM_c103012400197(ListUKM &L);
 AddressUKM isEmptyUKM_103012400197(ListUKM L);
-AddressUKM createListUKM_103012400197(InfotypeUKM x);
+AddressUKM createElementUKM_103012400197(InfotypeUKM x);
 void insertLastUKM_103012400197(ListUKM &  L, AddressUKM P);
 void printInfoUKM_103012400197(ListUKM L);
+#endif
