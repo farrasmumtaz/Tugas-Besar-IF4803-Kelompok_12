@@ -52,3 +52,13 @@ void insertAfterParent(listMhs &L, adrMhs p, adrMhs prec){
         p->next->prev = p;
     }
 }
+
+int totalMahasiswa(listMhs L){
+    int i = 0;
+    adrMhs q = L.first;
+    while (q != nullptr){
+        i++;
+        q = q->next;
+    }
+    return i;
+}
