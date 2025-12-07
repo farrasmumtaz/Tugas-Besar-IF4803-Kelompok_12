@@ -62,3 +62,21 @@ int totalMahasiswa(listMhs L){
     }
     return i;
 }
+
+int countUKM(listMhs L, string nimMhs) {
+    adrMhs m = searchMhs(L, nimMhs);
+
+    if (m == NULL) {
+        return 0; 
+    }
+
+    int count = 0;
+    AddressUKM u = m -> firstUKM.first;
+
+    while (u != NULL) {
+        count++;
+        u = u->next;
+    }
+
+    return count;
+}
