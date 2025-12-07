@@ -16,8 +16,14 @@ struct ListUKM {
 
 void createListUKM(ListUKM &L);
 AddressUKM isEmptyUKM(ListUKM L);
-AddressUKM createListUKM(InfotypeUKM x);
+AddressUKM createElementUKM(InfotypeUKM x);
+void insertFirstUKM(ListUKM &L, AddressUKM p);
 void insertLastUKM(ListUKM &  L, AddressUKM P);
+void insertAfterUKM(ListUKM &L, AddressUKM p, AddressUKM prec);
+void deleteFirstUKM(ListUKM &L, AddressUKM &p);
+void deleteLastUKM(ListUKM &L, AddressUKM &p);
+void deleteAfterUKM(ListUKM &L, AddressUKM &p, AddressUKM prec);
+AddressUKM searchUKM(ListUKM &L, string x);
 void printInfoUKM(ListUKM L);
 #endif
 

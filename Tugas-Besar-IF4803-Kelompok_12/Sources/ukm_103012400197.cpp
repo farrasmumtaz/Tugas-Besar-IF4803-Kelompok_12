@@ -10,7 +10,7 @@ AddressUKM isEmptyUKM(ListUKM L) {
     return L.first = nullptr;
 }
 
-AddressUKM createListUKM(InfotypeUKM x) {
+AddressUKM createElementUKM(InfotypeUKM x) {
     AddressUKM p;
     p = new elmenUKM;
     p -> info = x;
