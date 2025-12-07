@@ -40,4 +40,5 @@ void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec);
 
 adrMhs searchMhs(listMhs L, string nimMhs);
 void displayMhs(listMhs L);
+int totalMahasiswa(listMhs L);
 #endif
