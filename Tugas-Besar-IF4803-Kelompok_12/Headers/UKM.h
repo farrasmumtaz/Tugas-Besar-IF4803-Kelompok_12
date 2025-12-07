@@ -17,6 +17,7 @@ struct ListUKM {
 void createListUKM(ListUKM &L);
 AddressUKM isEmptyUKM(ListUKM L);
 AddressUKM createListUKM(InfotypeUKM x);
-void insertLastUKM_103012400197(ListUKM &  L, AddressUKM P);
-void printInfoUKM_103012400197(ListUKM L);
+void insertLastUKM(ListUKM &  L, AddressUKM P);
+void printInfoUKM(ListUKM L);
 #endif
+

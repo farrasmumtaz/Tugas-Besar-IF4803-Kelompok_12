@@ -1,6 +1,5 @@
 #ifndef MAHASISWA_H
 #define MAHASISWA_H
-#include "UKM.h"
 #include <iostream>
 using namespace std;
 
@@ -17,7 +16,7 @@ struct elemenMhs
     Mahasiswa info;
     adrMhs next;
     adrMhs prev;
-    AddressUKM firstUKM;
+    adrMhs firstUKM;
 };
 
 struct listMhs
