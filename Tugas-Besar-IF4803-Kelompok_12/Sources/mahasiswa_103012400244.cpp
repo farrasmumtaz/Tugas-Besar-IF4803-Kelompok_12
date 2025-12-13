@@ -71,7 +71,7 @@ int countUKM(listMhs L, string nimMhs) {
     }
 
     int count = 0;
-    AddressUKM u = m -> firstUKM.first;
+    AddressUKM u = m -> firstUKM;
 
     while (u != NULL) {
         count++;
