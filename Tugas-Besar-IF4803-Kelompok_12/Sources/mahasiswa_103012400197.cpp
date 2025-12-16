@@ -1,30 +1,29 @@
-#include <iostream>
 #include "Mahasiswa.h"
 
 void deleteFirstParent(listMhs &L, adrMhs &p) {
-    if (L.first == NULL)
+    if (L.first == nullptr && L.last == nullptr)
     {
-        p = NULL;
+        p = nullptr;
     }
     else if (L.first == L.last)
     {
         p = L.first;
-        L.first = NULL;
-        L.last = NULL;
+        L.first = nullptr;
+        L.last = nullptr;
     }
     else
     {
         p = L.first;
         L.first = p->next;
-        L.first->prev = NULL;
-        p->next = NULL;
+        L.first->prev = nullptr;
+        p->next = nullptr;
     }
 }
 
 void deleteLastParent(listMhs &L, adrMhs &p) {
-    if (L.first == NULL)
+    if (L.first == nullptr && L.last == nullptr)
     {
-        p = NULL;
+        p = nullptr;
     }
     else if (L.first == L.last)
     {
@@ -34,18 +33,18 @@ void deleteLastParent(listMhs &L, adrMhs &p) {
     {
         p = L.last;
         L.last = p->prev;
-        L.last->next = NULL;
-        p->prev = NULL;
+        L.last->next = nullptr;
+        p->prev = nullptr;
     }
 }
 
 void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec) {
-    if (prec != NULL && prec->next != NULL)
+    if (prec != nullptr && prec->next != nullptr)
     {
         p = prec->next;
         prec->next = p->next;
 
-        if (p->next != NULL)
+        if (p->next != nullptr)
         {
             p->next->prev = prec;
         }
@@ -54,42 +53,26 @@ void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec) {
             L.last = prec;
         }
 
-        p->next = NULL;
-        p->prev = NULL;
+        p->next = nullptr;
+        p->prev = nullptr;
     }
     else
     {
-        p = NULL;
+        p = nullptr;
     }
 }
 
 adrMhs searchMhs(listMhs L, string nimMhs) {
     adrMhs p = L.first;
-    while (p != NULL && p->info.nimMhs != nimMhs)
+    while (p != nullptr && p->info.nimMhs != nimMhs)
     {
         p = p->next;
     }
     return p;
 }
 
-void printUKMFromPointer(AddressUKM first) {
-    if (first == NULL)
-    {
-        cout << "Tidak ada UKM";
-        return;
-    }
-
-    AddressUKM p = first;
-    while (p != NULL)
-    {
-        cout << p->info;
-        if (p->next != NULL)
-            cout << ", ";
-        p = p->next;
-    }
-}
-
-int totalUKM(listMhs L, string nimMhs) {
+// Menghitung total UKM yang diikuti oleh seorang mahasiswa
+int totalUKM_1MHS(listMhs L, string nimMhs) {
     int count = 0;
     adrMhs m = searchMhs(L, nimMhs);
 

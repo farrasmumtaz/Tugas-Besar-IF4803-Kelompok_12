@@ -1,71 +1,60 @@
 #include "UKM.h"
-#include <iostream>
-using namespace std;
+#include "Mahasiswa.h"
 
-void insertFirstUKM(ListUKM &L, AddressUKM p){
-    if (isEmptyUKM(L)){
-        L.first = p;
+void insertFirstUKM(adrMhs p, AddressUKM q){
+    if (isEmptyUKM_1Mhs(p)){
+        p->firstUKM = q;
     } else {
-        p->next = L.first;
-        L.first = p;
+        q->next = p->firstUKM;
+        p->firstUKM = q;
     }
 }
 
-void insertAfterUKM(ListUKM &L, AddressUKM p, AddressUKM prec){
-    if (prec->next == nullptr){
-        insertLastUKM(L,p);
-    } else {
-        p->next = prec->next;
-        prec->next = p;
-    }
+void insertAfterUKM(adrMhs L, AddressUKM p, AddressUKM prec){
+    p->next = prec->next;
+    prec->next = p;
 }
 
-void deleteFirstUKM(ListUKM &L, AddressUKM &p){
-    if (isEmptyUKM(L)){
-        cout << "List Kosong\n";
-        p = nullptr;
-    } else if (L.first->next == nullptr){
-        p = L.first;
-        L.first = nullptr;
+void deleteFirstUKM(adrMhs p, AddressUKM &q){
+    if (isEmptyUKM_1Mhs(p)){
+        cout << "Tidak ada UKM yang diikuti " << p->info.namaMhs << "untuk dihapus.\n";
+        q = nullptr;
     } else {
-        p = L.first;
-        L.first = p->next;
-        p->next = nullptr;
-    }
-}
-
-void deleteLastUKM(ListUKM &L, AddressUKM &p){
-    if (isEmptyUKM(L)){
-        cout << "List Kosong\n";
-        p = nullptr;
-    } else if (L.first->next == nullptr){
-        p = L.first;
-        L.first = nullptr;
-    } else {
-        AddressUKM q = L.first;
-        while (q->next->next != nullptr){
-            q = q->next;
-        }
-        p = q->next;
+        q = p->firstUKM;
+        p->firstUKM = q->next;
         q->next = nullptr;
     }
 }
 
-void deleteAfterUKM(ListUKM &L, AddressUKM &p, AddressUKM prec){
-    if (prec->next->next == nullptr){
-        p = prec->next;
-        prec->next = nullptr;
+void deleteLastUKM(adrMhs p, AddressUKM &q){
+    if (isEmptyUKM_1Mhs(p)){
+        cout << "Tidak ada UKM yang diikuti " << p->info.namaMhs << "untuk dihapus.\n";
+        q = nullptr;
+    } else if (p->firstUKM->next == nullptr){
+        deleteFirstUKM(p, q);
     } else {
-        //cek lgi nanti
-        p = prec->next;
-        prec->next = p->next;
-        p->next = nullptr;
+        AddressUKM r = p->firstUKM;
+        while (r->next->next != nullptr){
+            r = r->next;
+        }
+        q = r->next;
+        r->next = nullptr;
     }
 }
 
-AddressUKM searchUKM(ListUKM &L, string x){
-    AddressUKM q = L.first;
-    while (q->info != x && q != nullptr){
+void deleteAfterUKM(adrMhs p, AddressUKM &q, AddressUKM prec){
+    if (prec != nullptr && prec->next != nullptr){
+        q = prec->next;
+        prec->next = q->next;
+        q->next = nullptr;
+    } else {
+        q = nullptr;
+    }
+}
+
+AddressUKM searchUKM(adrMhs p, InfotypeUKM x){
+    AddressUKM q = p->firstUKM;
+    while (q != nullptr && q->info != x){
         q = q->next;
     }
     return q;

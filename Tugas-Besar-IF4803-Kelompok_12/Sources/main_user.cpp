@@ -1,6 +1,6 @@
 #include "main.h"
 
-void menuUser(){
+void menuUser(listMhs &L){
     int option=-99;
     while (option != 0) {
         system("cls");

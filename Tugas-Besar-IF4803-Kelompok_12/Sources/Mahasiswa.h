@@ -4,8 +4,9 @@
 #include <iostream>
 using namespace std;
 
-typedef struct elemenMhs *adrMhs;
 
+typedef struct elemenMhs *adrMhs;
+typedef struct Mahasiswa InfotypeMhs;
 struct Mahasiswa
 {
     string namaMhs;
@@ -14,7 +15,7 @@ struct Mahasiswa
 
 struct elemenMhs
 {
-    Mahasiswa info;
+    InfotypeMhs info;
     adrMhs next;
     adrMhs prev;
     AddressUKM firstUKM;
@@ -41,5 +42,6 @@ void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec);
 adrMhs searchMhs(listMhs L, string nimMhs);
 void displayMhs(listMhs L);
 int totalMahasiswa(listMhs L);
-int totalUKM(listMhs L, string nimMhs);
+int totalUKM_1Mhs(listMhs L, string nimMhs);
+
 #endif
