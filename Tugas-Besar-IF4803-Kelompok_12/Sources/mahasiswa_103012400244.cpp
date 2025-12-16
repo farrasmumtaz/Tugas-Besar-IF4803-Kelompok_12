@@ -1,6 +1,5 @@
 #include "Mahasiswa.h"
-#include <iostream>
-using namespace std;
+
 
 void createListMhs(listMhs &L){
     L.first = nullptr;
@@ -9,6 +8,7 @@ void createListMhs(listMhs &L){
 
 adrMhs createElemenMhs(string namaMhs, string nimMhs){
     adrMhs p;
+    p = new elemenMhs;
     p->info.namaMhs = namaMhs;
     p->info.nimMhs = nimMhs;
     p->next = nullptr;
@@ -52,6 +52,15 @@ void insertAfterParent(listMhs &L, adrMhs p, adrMhs prec){
         p->next->prev = p;
     }
 }
+void displayMhs(listMhs L){
+    adrMhs p = L.first;
+    cout << "====== Daftar Mahasiswa ======\n";
+    while (p != nullptr){
+        cout << "Nama Mahasiswa: " << p->info.namaMhs << "("<< p->info.nimMhs << ")\n";
+        p = p->next;
+    }
+    cout << "==============================\n";
+}
 
 int totalMahasiswa(listMhs L){
     int i = 0;
@@ -61,22 +70,4 @@ int totalMahasiswa(listMhs L){
         q = q->next;
     }
     return i;
-}
-
-int countUKM(listMhs L, string nimMhs) {
-    adrMhs m = searchMhs(L, nimMhs);
-
-    if (m == NULL) {
-        return 0; 
-    }
-
-    int count = 0;
-    AddressUKM u = m -> firstUKM;
-
-    while (u != NULL) {
-        count++;
-        u = u->next;
-    }
-
-    return count;
 }

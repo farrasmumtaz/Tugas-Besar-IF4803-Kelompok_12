@@ -1,11 +1,12 @@
-#ifndef MAHASISWA_H
-#define MAHASISWA_H
+#ifndef MAIN_H
+#define MAIN_H
+#include "Mahasiswa.h"
 #include <iostream>
 using namespace std;
 
-void menuAdmin();
-void menuParent();
-void menuChild();
-void menuUser();
+void menuAdmin(listMhs &L);
+void menuParent(listMhs &L);
+void menuChild(listMhs &L);
+void menuUser(listMhs &L);
 
 #endif
