@@ -1,5 +1,5 @@
 #include "Mahasiswa.h"
-
+// fungsi untuk menghapus elemen mahasiswa di awal list
 void deleteFirstParent(listMhs &L, adrMhs &p) {
     if (L.first == nullptr && L.last == nullptr)
     {
@@ -19,7 +19,7 @@ void deleteFirstParent(listMhs &L, adrMhs &p) {
         p->next = nullptr;
     }
 }
-
+// fungsi untuk menghapus elemen mahasiswa di akhir list
 void deleteLastParent(listMhs &L, adrMhs &p) {
     if (L.first == nullptr && L.last == nullptr)
     {
@@ -37,7 +37,7 @@ void deleteLastParent(listMhs &L, adrMhs &p) {
         p->prev = nullptr;
     }
 }
-
+// fungsi untuk menghapus elemen mahasiswa setelah elemen tertentu
 void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec) {
     if (prec != nullptr && prec->next != nullptr)
     {
@@ -61,7 +61,7 @@ void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec) {
         p = nullptr;
     }
 }
-
+// fungsi untuk mencari elemen mahasiswa berdasarkan NIM
 adrMhs searchMhs(listMhs L, string nimMhs) {
     adrMhs p = L.first;
     while (p != nullptr && p->info.nimMhs != nimMhs)
