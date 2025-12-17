@@ -53,6 +53,7 @@ void menuHapusUKM(listMhs &L);
 void displayUKMmahasiswaDenganUKMTerbanyak(listMhs L);
 
 bool validasiNim(int nimMhs);
+void tampilSemuaUKMdenganMahasiswa(listMhs L);
 void dataDummy(listMhs &L);
 
 #endif

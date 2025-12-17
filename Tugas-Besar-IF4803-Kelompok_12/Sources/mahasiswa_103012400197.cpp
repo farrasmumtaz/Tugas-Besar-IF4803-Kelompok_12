@@ -1,6 +1,7 @@
 #include "Mahasiswa.h"
 // fungsi untuk menghapus elemen mahasiswa di awal list
-void deleteFirstParent(listMhs &L, adrMhs &p) {
+void deleteFirstParent(listMhs &L, adrMhs &p)
+{
     if (L.first == nullptr && L.last == nullptr)
     {
         p = nullptr;
@@ -20,7 +21,8 @@ void deleteFirstParent(listMhs &L, adrMhs &p) {
     }
 }
 // fungsi untuk menghapus elemen mahasiswa di akhir list
-void deleteLastParent(listMhs &L, adrMhs &p) {
+void deleteLastParent(listMhs &L, adrMhs &p)
+{
     if (L.first == nullptr && L.last == nullptr)
     {
         p = nullptr;
@@ -38,7 +40,8 @@ void deleteLastParent(listMhs &L, adrMhs &p) {
     }
 }
 // fungsi untuk menghapus elemen mahasiswa setelah elemen tertentu
-void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec) {
+void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec)
+{
     if (prec != nullptr && prec->next != nullptr)
     {
         p = prec->next;
@@ -62,7 +65,8 @@ void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec) {
     }
 }
 // fungsi untuk mencari elemen mahasiswa berdasarkan NIM
-adrMhs searchMhs(listMhs L, int nimMhs) {
+adrMhs searchMhs(listMhs L, int nimMhs)
+{
     adrMhs p = L.first;
     while (p != nullptr && p->info.nimMhs != nimMhs)
     {
@@ -72,14 +76,15 @@ adrMhs searchMhs(listMhs L, int nimMhs) {
 }
 
 // Menghitung total UKM yang diikuti oleh seorang mahasiswa
-int totalUKM_1Mhs(listMhs L, int nimMhs) {
+int totalUKM_1Mhs(listMhs L, int nimMhs)
+{
     int count = 0;
     adrMhs m = searchMhs(L, nimMhs);
 
     if (m == NULL)
     {
-        return 0;
         cout << "Mahasiswa tidak ditemukan\n";
+        return 0;
     }
 
     AddressUKM u = m->firstUKM;
@@ -92,46 +97,56 @@ int totalUKM_1Mhs(listMhs L, int nimMhs) {
     return count;
 }
 
-void MahasiswaUKMTerbanyak(listMhs L) {
+void MahasiswaUKMTerbanyak(listMhs L)
+{
     adrMhs m = L.first;
     int maxUKM = 0;
 
-
-    while (m != nullptr) {
+    while (m != nullptr)
+    {
         int count = 0;
         AddressUKM u = m->firstUKM;
-        while (u != nullptr) {
+        while (u != nullptr)
+        {
             count++;
             u = u->next;
         }
-        if (count > maxUKM) {
+        if (count > maxUKM)
+        {
             maxUKM = count;
         }
         m = m->next;
     }
 
-    if (maxUKM > 0) {
+    if (maxUKM > 0)
+    {
         cout << "Mahasiswa dengan UKM terbanyak adalah:\n ";
         m = L.first;
-        while (m != nullptr) {
+        while (m != nullptr)
+        {
             int count = 0;
             AddressUKM u = m->firstUKM;
-            while (u != nullptr) {
+            while (u != nullptr)
+            {
                 count++;
                 u = u->next;
             }
-            if (count == maxUKM) {
+            if (count == maxUKM)
+            {
                 cout << m->info.namaMhs << "(" << m->info.nimMhs << ")" << endl;
             }
             m = m->next;
         }
         cout << "Dengan jumlah UKM: " << maxUKM << endl;
-    } else {
+    }
+    else
+    {
         cout << "Tidak ada mahasiswa yang mengikuti UKM.\n";
     }
 }
 
-void dataDummy(listMhs &L) {
+void dataDummy(listMhs &L)
+{
     adrMhs m1 = createElemenMhs("Andi", 101);
     adrMhs m2 = createElemenMhs("Budi", 102);
     adrMhs m3 = createElemenMhs("Yanto", 103);
@@ -146,11 +161,11 @@ void dataDummy(listMhs &L) {
     insertLastUKM(m1, createElementUKM("Basket"));
     insertLastUKM(m1, createElementUKM("Cianjur"));
     insertLastUKM(m1, createElementUKM("Catur"));
-    
+
     insertLastUKM(m2, createElementUKM("Basket"));
     insertLastUKM(m2, createElementUKM("Pati"));
     insertLastUKM(m2, createElementUKM("Papua"));
-    
+
     insertLastUKM(m3, createElementUKM("Futsal"));
     insertLastUKM(m3, createElementUKM("Tenis Meja"));
 
