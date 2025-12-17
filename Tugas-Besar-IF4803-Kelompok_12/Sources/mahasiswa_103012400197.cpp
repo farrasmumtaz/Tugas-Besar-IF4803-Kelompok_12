@@ -72,13 +72,14 @@ adrMhs searchMhs(listMhs L, string nimMhs) {
 }
 
 // Menghitung total UKM yang diikuti oleh seorang mahasiswa
-int totalUKM_1MHS(listMhs L, string nimMhs) {
+int totalUKM_1Mhs(listMhs L, string nimMhs) {
     int count = 0;
     adrMhs m = searchMhs(L, nimMhs);
 
     if (m == NULL)
     {
         return 0;
+        cout << "Mahasiswa tidak ditemukan\n";
     }
 
     AddressUKM u = m->firstUKM;
@@ -89,4 +90,35 @@ int totalUKM_1MHS(listMhs L, string nimMhs) {
         u = u->next;
     }
     return count;
+}
+
+void dataDummy(listMhs &L) {
+    adrMhs m1 = createElemenMhs("Andi", "103012400120");
+    adrMhs m2 = createElemenMhs("Budi", "103012400635");
+    adrMhs m3 = createElemenMhs("Yanto", "103012400285");
+    adrMhs m4 = createElemenMhs("Dedi", "103012400733");
+    adrMhs m5 = createElemenMhs("Setiawan", "103012400419");
+
+    insertLastParent(L, m1);
+    insertLastParent(L, m2);
+    insertLastParent(L, m3);
+    insertLastParent(L, m4);
+    insertLastParent(L, m5);
+
+    insertLastUKM(m1, createElementUKM("Basket"));
+    insertLastUKM(m1, createElementUKM("Cianjur"));
+    insertLastUKM(m1, createElementUKM("Catur"));
+    
+    insertLastUKM(m2, createElementUKM("Basket"));
+    insertLastUKM(m2, createElementUKM("Pati"));
+    insertLastUKM(m2, createElementUKM("Papua"));
+    
+    insertLastUKM(m3, createElementUKM("Futsal"));
+    insertLastUKM(m3, createElementUKM("Tenis Meja"));
+
+    insertLastUKM(m4, createElementUKM("Futsal"));
+    insertLastUKM(m4, createElementUKM("Panahan"));
+
+    insertLastUKM(m5, createElementUKM("Futsal"));
+    insertLastUKM(m5, createElementUKM("Badminton"));
 }

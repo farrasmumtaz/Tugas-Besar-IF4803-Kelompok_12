@@ -7,6 +7,7 @@ using namespace std;
 
 void menuUser(listMhs &L)
 {
+    adrMhs p;
     int option = -99;
     while (option != 0)
     {
@@ -14,14 +15,12 @@ void menuUser(listMhs &L)
         cout << "====================== Menu Studi Kasus ===================== " << endl;
         cout << "|| 1. Tambah Mahasiswa                                     ||" << endl;
         cout << "|| 2. Hapus Mahasiswa                                      ||" << endl;
-        cout << "|| 2. Tambah UKM                                           ||" << endl;
-        cout << "|| 2. Hapus UKM                                            ||" << endl;
-        cout << "|| 3. Tambah UKM ke Mahasiswa                              ||" << endl;
-        cout << "|| 4. Hapus UKM dari Mahasiswa                             ||" << endl;
+        cout << "|| 3. Tambah UKM                                           ||" << endl;
+        cout << "|| 4. Hapus UKM                                            ||" << endl;
         cout << "|| 5. Cari Mahasiswa                                       ||" << endl;
         cout << "|| 6. Tampilkan UKM yang Diikuti Satu Mahasiswa            ||" << endl;
         cout << "|| 7. Hitung Total Mahasiswa                               ||" << endl;
-        cout << "|| 8. Hitung UKM yang diikuti 1 Mahasiswa                  ||" << endl;
+        cout << "|| 8. Hitung UKM yang diikuti 1 Mahasiswa                 ||" << endl;
         cout << "|| 0. back                                                 ||" << endl;
         cout << "============================================================= " << endl;
         cout << "Choose your option : ";
@@ -44,7 +43,7 @@ void menuUser(listMhs &L)
             menuCari(L);
             break;
         case 6:
-            tampilUKMUnik(L);
+            printInfoUKM_1Mhs(p);
             break;
         case 7:
             cout << "Total Mahasiswa: " << totalMahasiswa(L) << endl;
@@ -114,7 +113,6 @@ void menuTambahMahasiswa(listMhs &L)
     }
 }
 
-/* ================= HAPUS MAHASISWA ================= */
 
 void menuHapusMahasiswa(listMhs &L)
 {
@@ -156,7 +154,6 @@ void menuHapusMahasiswa(listMhs &L)
     }
 }
 
-/* ================= TAMBAH UKM ================= */
 
 void menuTambahUKM(listMhs &L)
 {
@@ -212,7 +209,6 @@ void menuTambahUKM(listMhs &L)
     }
 }
 
-/* ================= HAPUS UKM ================= */
 
 void menuHapusUKM(listMhs &L)
 {
@@ -265,7 +261,6 @@ void menuHapusUKM(listMhs &L)
     }
 }
 
-/* ================= CARI MAHASISWA ================= */
 
 void menuCari(listMhs &L)
 {
@@ -285,44 +280,4 @@ void menuCari(listMhs &L)
     }
 }
 
-/* ================= UKM UNIK ================= */
 
-void tampilUKMUnik(listMhs L)
-{
-    string ukmUnik[100]; // asumsi maksimal 100 UKM unik
-    int jumlah = 0;
-
-    adrMhs m = L.first;
-
-    system("cls");
-    cout << "===== DAFTAR UKM UNIK =====\n";
-
-    while (m != NULL)
-    {
-        AddressUKM u = m->firstUKM;
-        while (u != NULL)
-        {
-            bool sudahAda = false;
-
-            // cek apakah UKM sudah pernah dicatat
-            for (int i = 0; i < jumlah; i++)
-            {
-                if (ukmUnik[i] == u->info)
-                {
-                    sudahAda = true;
-                    break;
-                }
-            }
-
-            if (!sudahAda)
-            {
-                cout << "- " << u->info << endl;
-                ukmUnik[jumlah] = u->info;
-                jumlah++;
-            }
-
-            u = u->next;
-        }
-        m = m->next;
-    }
-}
