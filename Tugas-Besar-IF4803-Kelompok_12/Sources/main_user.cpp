@@ -5,26 +5,31 @@
 
 using namespace std;
 
+
+
 void menuUser(listMhs &L)
 {
     adrMhs p;
     int option = -99;
     while (option != 0)
     {
-        system("cls");
-        cout << "====================== Menu Studi Kasus ===================== " << endl;
-        cout << "|| 1. Tambah Mahasiswa                                     ||" << endl;
-        cout << "|| 2. Hapus Mahasiswa                                      ||" << endl;
-        cout << "|| 3. Tambah UKM                                           ||" << endl;
-        cout << "|| 4. Hapus UKM                                            ||" << endl;
-        cout << "|| 5. Cari Mahasiswa                                       ||" << endl;
-        cout << "|| 6. Tampilkan UKM yang Diikuti Satu Mahasiswa            ||" << endl;
-        cout << "|| 7. Hitung Total Mahasiswa                               ||" << endl;
-        cout << "|| 8. Hitung UKM yang diikuti 1 Mahasiswa                 ||" << endl;
-        cout << "|| 0. back                                                 ||" << endl;
-        cout << "============================================================= " << endl;
+        cout << "========================== Menu Studi Kasus ========================= " << endl;
+        cout << "|| 1. Tambah Mahasiswa                                             ||" << endl;
+        cout << "|| 2. Hapus Mahasiswa                                              ||" << endl;
+        cout << "|| 3. Tambah UKM                                                   ||" << endl;
+        cout << "|| 4. Hapus UKM                                                    ||" << endl;
+        cout << "|| 5. Cari Mahasiswa Dengan UKM Terbanyak                          ||" << endl;
+        cout << "|| 6. Tampilkan UKM yang Diikuti Mahasiswa dengan UKM Terbanyak    ||" << endl;
+        cout << "|| 7. Hitung Total Mahasiswa                                       ||" << endl;
+        cout << "|| 8. Hitung UKM yang diikuti 1 Mahasiswa                          ||" << endl;
+        cout << "|| 0. back                                                         ||" << endl;
+        cout << "===================================================================== " << endl;
         cout << "Choose your option : ";
         cin >> option;
+        if(!validasiInput(option)){
+            continue;
+        }
+        system("cls");
         switch (option)
         {
         case 1:
@@ -40,37 +45,45 @@ void menuUser(listMhs &L)
             menuHapusUKM(L);
             break;
         case 5:
-            menuCari(L);
+            menuCariMhsUKMTerbanyak(L); // done
             break;
         case 6:
-            printInfoUKM_1Mhs(p);
+            displayUKMmahasiswaDenganUKMTerbanyak(L);
             break;
         case 7:
             cout << "Total Mahasiswa: " << totalMahasiswa(L) << endl;
             break;
         case 8:
         {
-            string nim;
+            int nim;
+            displayMhs(L);
             cout << "Masukkan NIM Mahasiswa: ";
             cin >> nim;
             cout << "Total UKM: " << totalUKM_1Mhs(L, nim) << endl;
             break;
         }
+        default:
+            system("cls");
+            cout << "Input tidak valid, coba lagi.\n";
         }
     }
     while (option != 0)
         ;
 }
+// 1. tambah mahasiswa
 
 void menuTambahMahasiswa(listMhs &L)
 {
     int pilih;
-    string nama, nim;
+    string nama;
+    int nim;
     cout << "Nama Mahasiswa : ";
     cin >> nama;
     cout << "NIM Mahasiswa  : ";
     cin >> nim;
-
+    if (!validasiNim(nim)) {
+        return;
+    }
     if (searchMhs(L, nim) != NULL)
     {
         cout << "Mahasiswa sudah terdaftar!\n";
@@ -96,7 +109,7 @@ void menuTambahMahasiswa(listMhs &L)
         break;
     case 3:
     {
-        string nim;
+        int nim;
         cout << "Insert setelah NIM: ";
         cin >> nim;
         adrMhs prec = searchMhs(L, nim);
@@ -110,15 +123,18 @@ void menuTambahMahasiswa(listMhs &L)
             break;
         }
     }
+    default:
+        cout << "Input tidak valid\n";
+        break;
     }
 }
 
-
+// 2. hapus mahasiswa
 void menuHapusMahasiswa(listMhs &L)
 {
     int pilih;
     adrMhs p, prec;
-    string nim;
+    int nim;
 
     cout << "1. Delete First\n";
     cout << "2. Delete Last\n";
@@ -151,13 +167,17 @@ void menuHapusMahasiswa(listMhs &L)
             cout << "Mahasiswa tidak ditemukan\n";
             break;
         }
+    default:
+        cout << "Input tidak valid\n";
+        break;
     }
 }
 
-
+//3. tambah UKM
 void menuTambahUKM(listMhs &L)
 {
-    string nim, ukm;
+    string ukm;
+    int nim;
     int pilih;
     displayMhs(L);
     cout << "Masukkan NIM Mahasiswa: ";
@@ -206,13 +226,17 @@ void menuTambahUKM(listMhs &L)
             break;
         }
     }
+    default:
+        cout << "Input tidak valid\n";
+        break;
     }
 }
 
-
+//4. hapus UKM
 void menuHapusUKM(listMhs &L)
 {
-    string nim, ukm;
+    string ukm;
+    int nim;
     int pilih;
     AddressUKM q;
 
@@ -244,6 +268,7 @@ void menuHapusUKM(listMhs &L)
         cout << "UKM " << q->info << " telah dihapus.\n";
         break;
     case 3:
+    {
         printInfoUKM_1Mhs(m);
         cout << "UKM prec: ";
         cin >> ukm;
@@ -259,25 +284,16 @@ void menuHapusUKM(listMhs &L)
             break;
         }
     }
+    default:
+        cout << "Input tidak valid\n";
+        break;
+    }
 }
 
-
-void menuCari(listMhs &L)
+//5. cari mahasiswa dengan UKM terbanyak
+void menuCariMhsUKMTerbanyak(listMhs &L)
 {
-    string nim;
-    cout << "Masukkan NIM: ";
-    cin >> nim;
-
-    adrMhs m = searchMhs(L, nim);
-    if (m != NULL)
-    {
-        cout << "Nama: " << m->info.namaMhs << endl;
-        printInfoUKM_1Mhs(m);
-    }
-    else
-    {
-        cout << "Mahasiswa tidak ditemukan\n";
-    }
+    MahasiswaUKMTerbanyak(L);
 }
 
-
+//6. tampilkan UKM yang diikuti mahasiswa dengan UKM terbanyak

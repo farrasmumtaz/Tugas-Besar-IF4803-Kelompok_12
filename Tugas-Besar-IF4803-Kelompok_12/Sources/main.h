@@ -8,5 +8,5 @@ void menuAdmin(listMhs &L);
 void menuParent(listMhs &L);
 void menuChild(listMhs &L);
 void menuUser(listMhs &L);
-
+bool validasiInput(int x);
 #endif
