@@ -44,4 +44,12 @@ void displayMhs(listMhs L);
 int totalMahasiswa(listMhs L);
 int totalUKM_1Mhs(listMhs L, string nimMhs);
 
+void menuTambahMahasiswa(listMhs &L);
+void menuHapusMahasiswa(listMhs &L);
+void menuCari(listMhs &L);
+void menuTambahUKM(listMhs &L);
+void menuHapusUKM(listMhs &L);
+
+void dataDummy(listMhs &L);
+
 #endif

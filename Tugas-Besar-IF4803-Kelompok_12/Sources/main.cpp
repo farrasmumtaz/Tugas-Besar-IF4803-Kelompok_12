@@ -9,7 +9,7 @@ int main()
 {  
    listMhs L;
    createListMhs(L);
-   
+   dataDummy(L);
    int option=-99;
    while (option != 0) {
         system("cls");

@@ -38,3 +38,28 @@ void printInfoUKM_1Mhs(adrMhs p) {
     }
 }
 
+void UKM_Mhsterbanyak(listMhs L) {
+    adrMhs m = L.first;
+    int maxUKM = 0;
+    string namaMhsTerbanyak;
+
+    while (m != nullptr) {
+        int count = 0;
+        AddressUKM u = m->firstUKM;
+        while (u != nullptr) {
+            count++;
+            u = u->next;
+        }
+        if (count > maxUKM) {
+            maxUKM = count;
+            namaMhsTerbanyak = m->info.namaMhs;
+        }
+        m = m->next;
+    }
+
+    if (maxUKM > 0) {
+        cout << "Mahasiswa yang mengikuti UKM terbanyak adalah " << namaMhsTerbanyak << " dengan jumlah UKM: " << maxUKM << endl;
+    } else {
+        cout << "Tidak ada mahasiswa yang mengikuti UKM.\n";
+    }
+}
