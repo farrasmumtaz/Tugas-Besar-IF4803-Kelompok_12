@@ -5,8 +5,6 @@
 
 using namespace std;
 
-
-
 void menuUser(listMhs &L)
 {
     adrMhs p;
@@ -22,11 +20,13 @@ void menuUser(listMhs &L)
         cout << "|| 6. Tampilkan UKM yang Diikuti Mahasiswa dengan UKM Terbanyak    ||" << endl;
         cout << "|| 7. Hitung Total Mahasiswa                                       ||" << endl;
         cout << "|| 8. Hitung UKM yang diikuti 1 Mahasiswa                          ||" << endl;
+        cout << "|| 9. Tampilkan Seluruh UKM yang Diikuti mahasiswa                 ||" << endl;
         cout << "|| 0. back                                                         ||" << endl;
         cout << "===================================================================== " << endl;
         cout << "Choose your option : ";
         cin >> option;
-        if(!validasiInput(option)){
+        if (!validasiInput(option))
+        {
             continue;
         }
         system("cls");
@@ -62,6 +62,11 @@ void menuUser(listMhs &L)
             cout << "Total UKM: " << totalUKM_1Mhs(L, nim) << endl;
             break;
         }
+        case 9:
+        {
+            tampilSemuaUKMdenganMahasiswa(L);
+            break;
+        }
         default:
             system("cls");
             cout << "Input tidak valid, coba lagi.\n";
@@ -81,7 +86,8 @@ void menuTambahMahasiswa(listMhs &L)
     cin >> nama;
     cout << "NIM Mahasiswa  : ";
     cin >> nim;
-    if (!validasiNim(nim)) {
+    if (!validasiNim(nim))
+    {
         return;
     }
     if (searchMhs(L, nim) != NULL)
@@ -135,7 +141,7 @@ void menuHapusMahasiswa(listMhs &L)
     int pilih;
     adrMhs p, prec;
     int nim;
-
+    displayMhs(L);
     cout << "1. Delete First\n";
     cout << "2. Delete Last\n";
     cout << "3. Delete After\n";
@@ -146,10 +152,20 @@ void menuHapusMahasiswa(listMhs &L)
     {
     case 1:
         deleteFirstParent(L, p);
+        if (p == nullptr)
+        {
+            cout << "Tidak ada mahasiswa yang dihapus (list kosong).\n";
+            break;
+        }
         cout << "Mahasiswa dengan NIM " << p->info.nimMhs << " telah dihapus.\n";
         break;
     case 2:
         deleteLastParent(L, p);
+        if (p == nullptr)
+        {
+            cout << "Tidak ada mahasiswa yang dihapus (list kosong).\n";
+            break;
+        }
         cout << "Mahasiswa dengan NIM " << p->info.nimMhs << " telah dihapus.\n";
         break;
     case 3:
@@ -160,6 +176,11 @@ void menuHapusMahasiswa(listMhs &L)
         if (prec != NULL)
         {
             deleteAfterParent(L, p, prec);
+            if (p == nullptr)
+            {
+                cout << "Tidak ada mahasiswa yang dihapus (list kosong).\n";
+                break;
+            }
             cout << "Mahasiswa dengan NIM " << p->info.nimMhs << " telah dihapus.\n";
         }
         else
@@ -173,7 +194,7 @@ void menuHapusMahasiswa(listMhs &L)
     }
 }
 
-//3. tambah UKM
+// 3. tambah UKM
 void menuTambahUKM(listMhs &L)
 {
     string ukm;
@@ -232,7 +253,7 @@ void menuTambahUKM(listMhs &L)
     }
 }
 
-//4. hapus UKM
+// 4. hapus UKM
 void menuHapusUKM(listMhs &L)
 {
     string ukm;
@@ -261,10 +282,20 @@ void menuHapusUKM(listMhs &L)
     {
     case 1:
         deleteFirstUKM(m, q);
+        if (q == nullptr)
+        {
+            cout << "Tidak ada mahasiswa yang dihapus (list kosong).\n";
+            break;
+        }
         cout << "UKM " << q->info << " telah dihapus.\n";
         break;
     case 2:
         deleteLastUKM(m, q);
+        if (q == nullptr)
+        {
+            cout << "Tidak ada mahasiswa yang dihapus (list kosong).\n";
+            break;
+        }
         cout << "UKM " << q->info << " telah dihapus.\n";
         break;
     case 3:
@@ -276,6 +307,11 @@ void menuHapusUKM(listMhs &L)
         if (prec != NULL)
         {
             deleteAfterUKM(m, q, prec);
+            if (q == nullptr)
+            {
+                cout << "Tidak ada mahasiswa yang dihapus (list kosong).\n";
+                break;
+            }
             cout << "UKM " << q->info << " telah dihapus.\n";
         }
         else
@@ -290,10 +326,29 @@ void menuHapusUKM(listMhs &L)
     }
 }
 
-//5. cari mahasiswa dengan UKM terbanyak
+// 5. cari mahasiswa dengan UKM terbanyak
 void menuCariMhsUKMTerbanyak(listMhs &L)
 {
     MahasiswaUKMTerbanyak(L);
 }
 
-//6. tampilkan UKM yang diikuti mahasiswa dengan UKM terbanyak
+void tampilSemuaUKMdenganMahasiswa(listMhs L)
+{
+    adrMhs p = L.first;
+
+    if (p == NULL)
+    {
+        cout << "Tidak ada mahasiswa yang terdaftar.\n";
+        return;
+    }
+
+    cout << "===== DAFTAR UKM SETIAP MAHASISWA =====\n";
+
+    while (p != NULL)
+    {
+        cout << p->info.namaMhs << ": ";
+        printInfoUKM_1Mhs(p);
+        cout << endl;
+        p = p->next;
+    }
+}
