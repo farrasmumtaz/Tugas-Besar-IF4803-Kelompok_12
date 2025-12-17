@@ -1,4 +1,5 @@
 #include "Mahasiswa.h"
+#include "main.h"
 
 void createListMhs(listMhs &L)
 {
@@ -6,8 +7,8 @@ void createListMhs(listMhs &L)
     L.last = nullptr;
 }
 // fungsi untuk membuat elemen mahasiswa
-adrMhs createElemenMhs(string namaMhs, string nimMhs)
-{
+adrMhs createElemenMhs(string namaMhs, int nimMhs)
+{   
     adrMhs p;
     p = new elemenMhs;
     p->info.namaMhs = namaMhs;
@@ -71,13 +72,13 @@ void insertAfterParent(listMhs &L, adrMhs p, adrMhs prec)
 void displayMhs(listMhs L)
 {
     adrMhs p = L.first;
-    cout << "====== Daftar Mahasiswa ======\n";
+    cout << "========= Daftar Mahasiswa ===========\n";
     while (p != nullptr)
     {
         cout << "Nama Mahasiswa: " << p->info.namaMhs << "(" << p->info.nimMhs << ")\n";
         p = p->next;
     }
-    cout << "==============================\n";
+    cout << "====================================\n";
 }
 //fungsi untuk menghitung total mahasiswa
 int totalMahasiswa(listMhs L)
@@ -90,4 +91,67 @@ int totalMahasiswa(listMhs L)
         q = q->next;
     }
     return i;
+}
+
+void displayUKMmahasiswaDenganUKMTerbanyak(listMhs L){
+    adrMhs p;
+    AddressUKM q;
+    int maxUKM = 0;
+    p = L.first;
+    while (p != nullptr) {
+        int temp = 0;
+        q = p->firstUKM;
+        while (q != nullptr) {
+            temp++;
+            q = q->next;
+        }
+        if (temp > maxUKM) {
+            maxUKM = temp;
+        }
+        p = p->next;
+    }
+
+    if (maxUKM > 0) {
+        cout << "Mahasiswa dengan UKM terbanyak adalah:\n ";
+        p = L.first;
+        while (p != nullptr) {
+            int temp = 0;
+            q = p->firstUKM;
+            while (q != nullptr) {
+                temp++;
+                q = q->next;
+            }
+            if (temp == maxUKM) {
+                cout << p->info.namaMhs << "(" << p->info.nimMhs << ")" << endl;
+                q = p->firstUKM;
+                while (q != nullptr) {
+                    cout << " - " << q->info << "\n";
+                    q = q->next;
+                }
+            }
+            p = p->next;
+        }
+    } else {
+        cout << "Tidak ada mahasiswa yang mengikuti UKM.\n";
+    }
+}
+
+bool validasiNim(int nimMhs){
+    if (cin.fail() || cin.peek()!='\n' || nimMhs<=0) {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "NIM tidak valid!\n";
+        return false;
+    }
+    return true;
+}
+
+bool validasiInput(int x) {
+    if (cin.fail() || cin.peek() != '\n') {
+        cin.clear();
+        cin.ignore(1000, '\n');
+        cout << "Input tidak valid!\n";
+        return false;
+    }
+    return true;
 }

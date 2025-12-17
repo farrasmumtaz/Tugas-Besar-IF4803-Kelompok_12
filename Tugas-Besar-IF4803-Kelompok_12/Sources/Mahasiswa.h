@@ -10,7 +10,7 @@ typedef struct Mahasiswa InfotypeMhs;
 struct Mahasiswa
 {
     string namaMhs;
-    string nimMhs;
+    int nimMhs;
 };
 
 struct elemenMhs
@@ -28,7 +28,7 @@ struct listMhs
 };
 
 void createListMhs(listMhs &L);
-adrMhs createElemenMhs(string namaMhs, string nimMhs);
+adrMhs createElemenMhs(string namaMhs, int nimMhs);
 bool isEmptyMhs(listMhs L);
 
 void insertFirstParent(listMhs &L, adrMhs p);
@@ -39,17 +39,20 @@ void deleteFirstParent(listMhs &L, adrMhs &p);
 void deleteLastParent(listMhs &L, adrMhs &p);
 void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec);
 
-adrMhs searchMhs(listMhs L, string nimMhs);
+adrMhs searchMhs(listMhs L, int nimMhs);
 void displayMhs(listMhs L);
 int totalMahasiswa(listMhs L);
-int totalUKM_1Mhs(listMhs L, string nimMhs);
+int totalUKM_1Mhs(listMhs L, int nimMhs);
 
 void menuTambahMahasiswa(listMhs &L);
 void menuHapusMahasiswa(listMhs &L);
-void menuCari(listMhs &L);
+void menuCariMhsUKMTerbanyak(listMhs &L);
+void MahasiswaUKMTerbanyak(listMhs L);
 void menuTambahUKM(listMhs &L);
 void menuHapusUKM(listMhs &L);
+void displayUKMmahasiswaDenganUKMTerbanyak(listMhs L);
 
+bool validasiNim(int nimMhs);
 void dataDummy(listMhs &L);
 
 #endif

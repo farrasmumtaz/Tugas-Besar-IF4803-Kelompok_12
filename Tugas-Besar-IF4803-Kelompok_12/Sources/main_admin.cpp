@@ -2,26 +2,28 @@
 #include "Mahasiswa.h"
 #include "UKM.h"
 
-
 void menuAdmin(listMhs &L){
     int option=-99;
     while (option != 0) {
         system("cls");
-        cout << "============ Menu Admin============ " << endl;
-        cout << "|| 1. Parent                     ||" << endl;
-        cout << "|| 2. Child                      ||" << endl;
-        cout << "|| 0. back                       ||" << endl;
-        cout << "================================== " << endl;
+        cout << "============ Menu Admin ============ " << endl;
+        cout << "|| 1. Parent                      ||" << endl;
+        cout << "|| 2. Child                       ||" << endl;
+        cout << "|| 0. back                        ||" << endl;
+        cout << "==================================== " << endl;
         cout << "Choose your option : ";
         cin >> option;
+        if(!validasiInput(option)){
+            continue;
+        }
         switch(option) {
            case 1  :
-                 cout << "you choose option 1" << endl;
+                 cout << "Memilih opsi 1" << endl;
                  system("cls");
                  menuParent(L);
                  continue;
            case 2  :
-                cout << "you choose option 2" << endl;
+                cout << "Memilih opsi 2" << endl;
                 system("cls");
                 menuChild(L);
                 continue;
@@ -30,7 +32,7 @@ void menuAdmin(listMhs &L){
                 break;
             default :
                 system("cls");
-                cout << "Invalid option. Please try again." << endl;
+                cout << "Input tidak valid, coba lagi.\n";
         }
     }
 }
@@ -41,7 +43,8 @@ void menuParent(listMhs &L){
     adrMhs p;
     adrMhs prec;
     InfotypeMhs x;
-    string namaMhs, nimMhs;
+    string namaMhs;
+    int nimMhs;
     while (option != 0) {
         cout << "=========== Menu Parent ============" << endl;
         cout << "|| 1. Insert First Parent         ||" << endl;
@@ -61,8 +64,15 @@ void menuParent(listMhs &L){
                 cout << "Insert First Parent\n";
                 cout << "Masukkan nama mahasiswa: ";
                 cin >> x.namaMhs;
-                cout << "Masukkan NIM mahasiswa: ";
+                cout << "Masukkan NIM mahasiswa(angka): ";
                 cin >> x.nimMhs;
+                if (!validasiNim(x.nimMhs)) {
+                    break;
+                }
+                if (searchMhs(L, x.nimMhs) != nullptr){
+                    cout << "Mahasiswa dengan NIM " << x.nimMhs << " sudah terdaftar.\n";
+                    break;
+                }
                 p = createElemenMhs(x.namaMhs, x.nimMhs);
                 insertFirstParent(L, p);
                 break;
@@ -73,6 +83,13 @@ void menuParent(listMhs &L){
                 cin >> x.namaMhs;
                 cout << "Masukkan NIM mahasiswa: ";
                 cin >> x.nimMhs;
+                if (!validasiNim(x.nimMhs)) {
+                    break;
+                }
+                if (searchMhs(L, x.nimMhs) != nullptr){
+                    cout << "Mahasiswa dengan NIM " << x.nimMhs << " sudah terdaftar.\n";
+                    break;
+                }
                 p = createElemenMhs(x.namaMhs, x.nimMhs);
                 insertLastParent(L, p);
                 break;
@@ -82,12 +99,22 @@ void menuParent(listMhs &L){
                 displayMhs(L);
                 cout << "Masukkan NIM mahasiswa yang menjadi prec: ";
                 cin >> nimMhs;
+                if (!validasiNim(nimMhs)) {
+                    break;
+                }
                 prec = searchMhs(L, nimMhs);
                 if (prec != nullptr) {
                     cout << "Masukkan nama mahasiswa: ";
                     cin >> x.namaMhs;
                     cout << "Masukkan NIM mahasiswa: ";
                     cin >> x.nimMhs;
+                    if (!validasiNim(x.nimMhs)) {
+                        break;
+                    }
+                    if (searchMhs(L, x.nimMhs) != nullptr){
+                        cout << "Mahasiswa dengan NIM " << x.nimMhs << " sudah terdaftar.\n";
+                        break;
+                    }
                     p = createElemenMhs(x.namaMhs, x.nimMhs);
                     insertAfterParent(L, p, prec);
                 } else {
@@ -110,6 +137,9 @@ void menuParent(listMhs &L){
                 displayMhs(L);
                 cout << "Masukkan NIM mahasiswa yang menjadi prec: ";
                 cin >> nimMhs;
+                if (!validasiNim(nimMhs)) {
+                    break;
+                }
                 prec = searchMhs(L, nimMhs);
                 if (prec != nullptr) {
                     deleteAfterParent(L, p, prec);
@@ -125,6 +155,9 @@ void menuParent(listMhs &L){
             case 0  :
                 system("cls");
                 break;
+            default :
+                system("cls");
+                cout << "Input tidak valid, coba lagi.\n";
         }
     }
 }
@@ -135,7 +168,7 @@ void menuChild(listMhs &L){
     AddressUKM prec;
     InfotypeUKM x;
     adrMhs parent;
-    string nimMhs;
+    int nimMhs;
     while (option != 0) {
         cout << "=========== Menu Child ============" << endl;
         cout << "|| 1. Insert First Child         ||" << endl;
@@ -156,10 +189,17 @@ void menuChild(listMhs &L){
                     displayMhs(L);
                     cout << "masukkan NIM mahasiswa parent: ";
                     cin >> nimMhs;
+                    if (!validasiNim(nimMhs)) {
+                        break;
+                    }
                     parent = searchMhs(L, nimMhs);
                     if (parent != nullptr) {
                         cout << "Masukkan nama UKM: ";
                         cin >> x;
+                        if (searchUKM(parent, x) != nullptr){
+                            cout << "UKM dengan nama " << x << " sudah terdaftar untuk mahasiswa dengan NIM " << nimMhs << ".\n";
+                            break;
+                        }
                         p = createElementUKM(x);
                         insertFirstUKM(parent, p);
                     } else {
@@ -172,10 +212,17 @@ void menuChild(listMhs &L){
                     displayMhs(L);
                     cout << "masukkan NIM mahasiswa parent: ";
                     cin >> nimMhs;
+                    if (!validasiNim(nimMhs)) {
+                        break;
+                    }
                     parent = searchMhs(L, nimMhs);
                     if (parent != nullptr) {
                         cout << "Masukkan nama UKM: ";
                         cin >> x;
+                        if (searchUKM(parent, x) != nullptr){
+                            cout << "UKM dengan nama " << x << " sudah terdaftar untuk mahasiswa dengan NIM " << nimMhs << ".\n";
+                            break;
+                        }
                         p = createElementUKM(x);
                         insertLastUKM(parent, p);
                     } else {
@@ -188,15 +235,26 @@ void menuChild(listMhs &L){
                     displayMhs(L);
                     cout << "masukkan NIM mahasiswa parent: ";
                     cin >> nimMhs;
+                    if (!validasiNim(nimMhs)) {
+                        break;
+                    }
                     parent = searchMhs(L, nimMhs);
                     if (parent != nullptr) {
                         printInfoUKM_1Mhs(parent);
+                        if (isEmptyUKM_1Mhs(parent)) {
+                            cout << "Tidak ada UKM yang dapat dijadikan prec.\n";
+                            break;
+                        }
                         cout << "Masukkan nama UKM yang menjadi prec: ";
                         cin >> x;
                         prec = searchUKM(parent, x);
                         if (prec != nullptr) {
                             cout << "Masukkan nama UKM: ";
                             cin >> x;
+                            if (searchUKM(parent, x) != nullptr){
+                                cout << "UKM dengan nama " << x << " sudah terdaftar untuk mahasiswa dengan NIM " << nimMhs << ".\n";
+                                break;
+                            }
                             p = createElementUKM(x);
                             insertAfterUKM(parent, p, prec);
                         } else {
@@ -212,6 +270,9 @@ void menuChild(listMhs &L){
                     displayMhs(L);
                     cout << "masukkan NIM mahasiswa parent: ";
                     cin >> nimMhs;
+                    if (!validasiNim(nimMhs)) {
+                        break;
+                    }
                     parent = searchMhs(L, nimMhs);
                     if (parent != nullptr) {
                         deleteFirstUKM(parent, p);
@@ -225,6 +286,9 @@ void menuChild(listMhs &L){
                     displayMhs(L);
                     cout << "masukkan NIM mahasiswa parent: ";
                     cin >> nimMhs;
+                    if (!validasiNim(nimMhs)) {
+                        break;
+                    }
                     parent = searchMhs(L, nimMhs);
                     if (parent != nullptr) {
                         deleteLastUKM(parent, p);
@@ -238,6 +302,9 @@ void menuChild(listMhs &L){
                     displayMhs(L);
                     cout << "masukkan NIM mahasiswa parent: ";
                     cin >> nimMhs;
+                    if (!validasiNim(nimMhs)) {
+                        break;
+                    }
                     parent = searchMhs(L, nimMhs);
                     if (parent != nullptr) {
                         printInfoUKM_1Mhs(parent);
@@ -259,6 +326,9 @@ void menuChild(listMhs &L){
                     displayMhs(L);
                     cout << "masukkan NIM mahasiswa parent: ";
                     cin >> nimMhs;
+                    if (!validasiNim(nimMhs)) {
+                        break;
+                    }
                     parent = searchMhs(L, nimMhs);
                     if (parent != nullptr) {
                         printInfoUKM_1Mhs(parent);
@@ -266,6 +336,12 @@ void menuChild(listMhs &L){
                         cout << "Mahasiswa dengan NIM " << nimMhs << " tidak ditemukan.\n";
                     }
                     break;
+                case 0  :
+                    system("cls");
+                    break;
+                default :
+                    system("cls");
+                    cout << "Input tidak valid, coba lagi.\n";
         }
     }
 }

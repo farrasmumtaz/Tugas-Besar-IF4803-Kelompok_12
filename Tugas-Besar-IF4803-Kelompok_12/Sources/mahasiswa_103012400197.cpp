@@ -62,7 +62,7 @@ void deleteAfterParent(listMhs &L, adrMhs &p, adrMhs prec) {
     }
 }
 // fungsi untuk mencari elemen mahasiswa berdasarkan NIM
-adrMhs searchMhs(listMhs L, string nimMhs) {
+adrMhs searchMhs(listMhs L, int nimMhs) {
     adrMhs p = L.first;
     while (p != nullptr && p->info.nimMhs != nimMhs)
     {
@@ -72,7 +72,7 @@ adrMhs searchMhs(listMhs L, string nimMhs) {
 }
 
 // Menghitung total UKM yang diikuti oleh seorang mahasiswa
-int totalUKM_1Mhs(listMhs L, string nimMhs) {
+int totalUKM_1Mhs(listMhs L, int nimMhs) {
     int count = 0;
     adrMhs m = searchMhs(L, nimMhs);
 
@@ -92,13 +92,51 @@ int totalUKM_1Mhs(listMhs L, string nimMhs) {
     return count;
 }
 
-void dataDummy(listMhs &L) {
-    adrMhs m1 = createElemenMhs("Andi", "103012400120");
-    adrMhs m2 = createElemenMhs("Budi", "103012400635");
-    adrMhs m3 = createElemenMhs("Yanto", "103012400285");
-    adrMhs m4 = createElemenMhs("Dedi", "103012400733");
-    adrMhs m5 = createElemenMhs("Setiawan", "103012400419");
+void MahasiswaUKMTerbanyak(listMhs L) {
+    adrMhs m = L.first;
+    int maxUKM = 0;
 
+
+    while (m != nullptr) {
+        int count = 0;
+        AddressUKM u = m->firstUKM;
+        while (u != nullptr) {
+            count++;
+            u = u->next;
+        }
+        if (count > maxUKM) {
+            maxUKM = count;
+        }
+        m = m->next;
+    }
+
+    if (maxUKM > 0) {
+        cout << "Mahasiswa dengan UKM terbanyak adalah:\n ";
+        m = L.first;
+        while (m != nullptr) {
+            int count = 0;
+            AddressUKM u = m->firstUKM;
+            while (u != nullptr) {
+                count++;
+                u = u->next;
+            }
+            if (count == maxUKM) {
+                cout << m->info.namaMhs << "(" << m->info.nimMhs << ")" << endl;
+            }
+            m = m->next;
+        }
+        cout << "Dengan jumlah UKM: " << maxUKM << endl;
+    } else {
+        cout << "Tidak ada mahasiswa yang mengikuti UKM.\n";
+    }
+}
+
+void dataDummy(listMhs &L) {
+    adrMhs m1 = createElemenMhs("Andi", 101);
+    adrMhs m2 = createElemenMhs("Budi", 102);
+    adrMhs m3 = createElemenMhs("Yanto", 103);
+    adrMhs m4 = createElemenMhs("Dedi", 104);
+    adrMhs m5 = createElemenMhs("Setiawan", 105);
     insertLastParent(L, m1);
     insertLastParent(L, m2);
     insertLastParent(L, m3);
